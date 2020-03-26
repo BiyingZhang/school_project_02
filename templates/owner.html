@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}Owner{% endblock %}
+{% block body %}
+    <h2>Create Account</h2>
+    {% if error %}
+        <div class="error"><strong>Error:</strong>
+    {{ error }}
+        </div>
+    {% endif %}
+    <a href="{{ url_for('register')}}">Create New Staff Account</a>
+	<br>
+	<br>
+	<div>
+		<h2>Events</h2>
+		{% if events %}
+			{% for event in events %}
+				<p style="margin-bottom:0"><strong>Event name:</strong> {{ event.eventname }}</p>
+				<p style="margin-bottom:0"><strong>Date:</strong> {{ event.date }}</p>
+				<p><strong>Requester:</strong> {{event.requester }}</p>
+				{% if event.workingStaff %}
+					<span><strong>Staff working: </strong></span>
+					{% for s in event.workingStaff %}
+						<span>{{s}}</span>
+					{% endfor %}
+				{% else %}
+					<h4 style="color:red">No staff has registered for this event!</h4>
+				{% endif %}
+				<hr>
+			{% endfor %}
+		{% else %}
+			<h4>No customer has requested for an event yet</h4>
+		{% endif %}
+	</div>
+{% endblock %}

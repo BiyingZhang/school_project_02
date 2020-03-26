@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Staff{% endblock %}
+{% block body %}
+    <h1 style="text-align:center">Staff Page</h1>
+    {% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
+	<br>
+	<h2>Scheduled Events</h2>
+	{% if scheduled %}
+		{% for event in scheduled %}
+			<p style="margin-bottom:0">Event name: {{ event.eventname }}</p>
+			<p style="margin-bottom:0">Date: {{ event.date }}</p>
+			<a href="{{url_for('eventUnsign', eventid=event.id)}}">Cancel Registration</a>
+			<hr>
+		{% endfor %}
+	{% else %}
+		<p>You have no scheduled events</p>
+	{% endif %}
+
+	<h2>Open Events</h2>
+	{% if openEvents %}
+		{% for event in openEvents %}
+			<p style="margin-bottom:0">Event name: {{ event.eventname }}</p>
+			<p style="margin-bottom:0">Date: {{ event.date }}</p>
+			<a href="{{url_for('eventSignUp', eventid=event.id)}}">Sign Up</a>
+			<hr>
+		{% endfor %}
+	{% else %}
+		<p>There are no open events</p>
+	{% endif %}
+{% endblock %}

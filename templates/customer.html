@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}Customer{% endblock %}
+{% block body %}
+	<h1 style="text-align:center">Customer Page</h1>
+	{% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
+	<div>
+		<h3>Events</h3>
+		{% if events %}
+			{% for event in events %}
+				<p style="margin-bottom:0">Event name: {{ event.eventname }}</p>
+				<p>Date: {{ event.date }}</p>
+
+				<a href="{{url_for('cancel_event', event=event.eventname)}}">Cancel</a>
+				<hr>
+			{% endfor %}
+		{% else %}
+			<p>You have not registered for any event</p>
+		{% endif %}
+	</div>
+
+
+	<div>
+		<h3>Register For New Event</h3>
+		<form action="" method="post">
+			<dl>
+				<dt>Event Name:
+				<dd><input type="text" name="eventName" size="30">
+				<dt>Event Date:
+				<dd><input type="date" placeholder="yyyy-mm-dd" name="eventDate" min="{{ minDate }}" max="2020-12-31">
+			</dl>
+			<div class="actions"><input type="submit" name="submit" value="Register"></div>
+		</form>
+	</div>
+
+{% endblock %}
